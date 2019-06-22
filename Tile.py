@@ -2,7 +2,6 @@
 """
 Created on Tue Jun 18 14:34:29 2019
 
-@author: Mike Senpai
 """
 import random
 
