@@ -47,3 +47,8 @@ class Tile:
 
     def getCoordinates():
         return xCoord, yCoord
+
+    #OVERRIDES
+
+    def print():
+        print(availableFood)

@@ -4,3 +4,6 @@ Created on Tue Jun 18 14:15:19 2019
 
 """
 
+class Hive:
+    def __init__(self):
+        return

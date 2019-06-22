@@ -5,9 +5,13 @@ Created on Tue Jun 18 13:22:54 2019
 """
 
 import numpy as np
-import Tile
+from World import World
 
-class world:
-    
-    def __init__(self):
-        self.board = np.empty([1000, 1000], Tile)      
+size = input("Select a map size: small/medium/large\n")
+print(size + " size selected.")
+
+if size == "medium":
+    world1 = World(1000)
+
+world1.displayBoard()
+
