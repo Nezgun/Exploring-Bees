@@ -6,8 +6,8 @@ class World:
     
     def __init__(self, size = 1000):
         self.size = size
-        self.board = np.empty((size, size), Tile)
+        self.board = np.empty((size, size), int)
 
-    def displayBoard():
-        print(board)
+    def displayBoard(self):
+        print(self.board)
 

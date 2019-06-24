@@ -1,6 +1,5 @@
-from WorldGen.Tile import Tile
+from WorldGen.World import World
 
-tile1 = Tile(5, 5)
-tile2 = Tile(8, 9)
+newWorld = World()
 
-print(tile1.distance(tile2))
+newWorld.displayBoard()
