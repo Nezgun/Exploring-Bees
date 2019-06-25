@@ -12,7 +12,7 @@ class Tile:
         self.yCoord = y
 
         #Is this tile a food source?
-        if random.random() > 0.90:
+        if random.random() > 0.99:
             self.foodSource = True
             self.availableFood = int(random.gauss(50, 10))
             self.fragrance = float(self.availableFood)
