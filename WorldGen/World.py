@@ -15,6 +15,16 @@ class World:
     def getSize(self):
         return self.size
 
+    def getTile(self, x, y):
+        return self.board[x][y]
+
+    def gatherFood(self, coords):
+        if self.board[coords[0]][coords[1]].isFoodSource():
+            self.board[coords[0]][coords[1]].foodReduce()
+            return 1
+        else:
+            return 0
+
     def displayBoard(self):
         print(" " + ("_" * 3 * self.size))
         for i in range(self.size):
