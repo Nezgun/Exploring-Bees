@@ -1,4 +1,5 @@
 from WorldGen.World import World
+from Hive import Hive
 
 class Bee:
     def __init__(self, world, hive):
