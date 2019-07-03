@@ -8,7 +8,7 @@ class Bee:
         self.location = self.affiliation.getLocation()
         self.carriedFood = 0
         #importantMemory
-        #genericMemory
+        #genericMemory linkedlist
         #hiveMemory
 
         return
