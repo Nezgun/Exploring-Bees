@@ -10,11 +10,34 @@ class LinkedList:
         self.head = newNode
         self.size += 1
 
-    def delete(self):
-        return
+    def insertAfter(self, target, data):
+        newNode = Node(data, target.getLink())
+        target.setLink(newNode)
 
-    def search(self):
-        return
+    def delete(self, data):
+        current = self.head
+        previous = None
+        while current:
+            if current.getData() == data:
+                if current == self.head:
+                    self.head = current.getLink()
+                else:
+                    previous.setLink(current.getLink())
+                self.size -= 1
+                return 1
+            else:
+                previous = current
+                current = current.getLink()
+        return 0
+
+    def search(self, data):
+        current = self.head
+        while current:
+            if current.getData() == data:
+                return current
+            else:
+                current = current.getLink()
+        return 0
 
     def getSize(self):
         return self.size
