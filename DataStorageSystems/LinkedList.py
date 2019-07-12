@@ -1,3 +1,7 @@
+'''
+Going to be used for bee's memory.  No need to edit the nodes as they come in, just dump them back into the hive
+'''
+
 from DataStorageSystems.Node import Node
 
 class LinkedList:
