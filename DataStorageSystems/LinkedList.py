@@ -45,3 +45,6 @@ class LinkedList:
 
     def getSize(self):
         return self.size
+
+    def copy(self):
+        return
