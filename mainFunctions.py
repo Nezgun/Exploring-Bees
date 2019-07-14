@@ -27,7 +27,7 @@ def displayWorldsCondensed(worldList):
     return display
 
 def saveWorld(worldList):
-    newFile = open(r"worldData.txt", "w")
+    newFile = open(r"SaveData/worldData.txt", "w")
     newFile.write(displayWorldsCondensed(worldList))
     newFile.close()
 
