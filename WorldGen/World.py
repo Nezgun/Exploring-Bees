@@ -31,7 +31,7 @@ class World:
             for j in range(self.size):
                 if self.board[i][j].isFoodSource():
                     fragrance = (self.board[i][j].getFragrance())
-                    radius = round(fragrance ** 0.5)
+                    radius = round((10 * fragrance) ** 0.5)
                     origin = [i, j]
                     coordList = self.circleArea(origin, radius)
                     trimmedCoordList = self.coordinateFilter(coordList)
