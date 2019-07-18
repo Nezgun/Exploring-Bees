@@ -57,7 +57,7 @@ class Tile:
             self.foodSource = False
 
     #Interactors
-    #Adds fragrance to nearby tiles Circules around self using rate of Fragrance * (1/r^2)
+    #Adds fragrance to nearby tiles Circles around self using rate of Fragrance * (1/r^2)
     def addFragrance(destination):
         return
 

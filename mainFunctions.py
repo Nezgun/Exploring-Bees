@@ -82,7 +82,4 @@ def execute():
         numOfWorlds, size = autoSetup()
 
     worldList = initalizeWorlds(numOfWorlds, sizeConversion(size)) #array of worlds involved in simulation
-
-    displayWorlds(worldList)
-
     return
