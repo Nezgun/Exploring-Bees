@@ -3,4 +3,4 @@ from Displays.DisplayFunctions import *
 from mainFunctions import *
 
 testWorld = World()
-fragranceMap(testWorld)
+fragranceMap_2D(testWorld)

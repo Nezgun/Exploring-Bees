@@ -8,7 +8,7 @@ class World:
     def __init__(self, size = 100):
         self.size = size
         self.board = [[0] * size for i in range(size)]
-        #i = x coord, j = y coord
+        #i = y coord, j = x coord
         for i in range(self.size):
             for j in range(self.size):
                 self.board[i][j] = Tile(i + 1, j + 1)
@@ -32,11 +32,12 @@ class World:
                 if self.board[i][j].isFoodSource():
                     fragrance = (self.board[i][j].getFragrance())
                     radius = round((10 * fragrance) ** 0.5)
-                    origin = [i, j]
+                    origin = [i, j] #[y, x]
                     coordList = self.circleArea(origin, radius)
                     trimmedCoordList = self.coordinateFilter(coordList)
                     for entry in trimmedCoordList:
                         if entry == origin:
+                            appliedFragrance = fragrance
                             continue
                         dist = self.distance(entry, origin)
                         appliedFragrance = fragrance / (dist ** 2)
@@ -138,28 +139,28 @@ class World:
     '''
     def circleArea(self, origin, radius):
         coordList = []
-        h = origin[0]
-        k = origin[1]
+        k = origin[0]
+        h = origin[1]
         constant = (radius ** 2) - (h ** 2)
         for y in range(k - radius, k + radius):
             for x in range(h - radius, h + radius):
                 if ((x ** 2 - (2 * x * h)) - (constant - (y - k) ** 2)) <= 0.1:
-                    coordList.append([x, y])
+                    coordList.append([y, x])
         return coordList
 
     '''
     distance: returns the distance between two coordinates
     args: coord1, coord2
-        coord1 is the first pair of [x,y] coordinates
-        coord2 is the second pair of [x,y] coordinates
+        coord1 is the first pair of [y,x] coordinates
+        coord2 is the second pair of [y,x] coordinates
     return:
         returns a double value that's the distance between the two points
     '''
     def distance(self, coord1, coord2):
-        x1 = coord1[0]
-        x2 = coord2[0]
-        y1 = coord1[1]
-        y2 = coord2[1]
+        x1 = coord1[1]
+        x2 = coord2[1]
+        y1 = coord1[0]
+        y2 = coord2[0]
         distance = (((x2 - x1) ** 2) + ((y2 - y1) ** 2)) ** 0.5
         return distance
 
