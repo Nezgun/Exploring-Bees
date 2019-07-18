@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 18 14:34:29 2019
 
-"""
+
 import random
-import math
 
 class Tile:
     def __init__(self, x, y):
         self.xCoord = x
         self.yCoord = y
+        self.hive = False
 
         #Is this tile a food source?
         if random.random() > 0.99:
@@ -20,6 +18,7 @@ class Tile:
             self.foodSource = False
             self.availableFood = 0
             self.fragrance = 0.00
+        self.originalFood = self.availableFood
 
     #Getters
     def getX(self):
@@ -55,17 +54,6 @@ class Tile:
         self.availableFood += 1
         if self.availableFood <= 0:
             self.foodSource = False
-
-    #Interactors
-    #Adds fragrance to nearby tiles Circles around self using rate of Fragrance * (1/r^2)
-    def addFragrance(destination):
-        return
-
-    def distance(self, destination):
-        x1 = self.xCoord
-        y1 = self.yCoord
-        x2, y2 = destination.getCoordinates()
-        return math.sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)) 
 
     #Display
     def displayInfo(self):

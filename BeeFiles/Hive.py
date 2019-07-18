@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 18 14:15:19 2019
 
-"""
+from WorldGen.World import World
+from BeeFiles.Bee import Bee
 
 class Hive:
     def __init__(self):
         self.location = [0, 0]
-        #Bees Total = home plus away
+        self.totalBees = 0
         #Home Bees
         #Away Bees
         foodSupply = 0

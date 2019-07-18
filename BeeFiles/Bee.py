@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from WorldGen.World import World
-from Hive import Hive
 
 class Bee:
-    def __init__(self, world, hive):
-        self.world = world
-        self.affiliation = hive
+    def __init__(self):
+        #self.affiliation = hive
         self.location = self.affiliation.getLocation()
         self.carriedFood = 0
         #importantMemory

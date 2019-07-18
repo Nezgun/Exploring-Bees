@@ -15,11 +15,21 @@ def fragranceMap_2D(world):
     Z = Z.reshape((world.getSize(), world.getSize()))
     print(Z.shape)
 
-    plt.figure()
-    fragrancePlot = plt.contourf(X, Y, Z, locator=mpl.ticker.LogLocator())
+    #Linear
+    plt.figure(1)
+    fragrancePlot = plt.contourf(X, Y, Z)
     plt.colorbar()
-    plt.clabel(fragrancePlot, inline=False, fontsize=10)
-    plt.title('Fragrance Plot')
+    plt.title('Fragrance Plot (Linear)')
     plt.xlabel('x')
     plt.ylabel('y')
+    
+    #Log
+    plt.figure(2)
+    fragrancePlot = plt.contourf(X, Y, Z, locator=mpl.ticker.LogLocator())
+    plt.colorbar()
+    plt.title('Fragrance Plot (Log)')
+    plt.xlabel('x')
+    plt.ylabel('y')
+
+    #Displays
     plt.show()

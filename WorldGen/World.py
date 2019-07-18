@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 #WORLD GEN ISSUE: Takes up wayyyy too much ram for a 5k x 5k world.  Need to modularize the generation
 #Generate a dictionary of coordinates that coorespond to their tiles, that way can iterate through a dictionary rather than a double for loop
 
 from WorldGen.Tile import Tile
+from BeeFiles.Hive import Hive
 
 class World:
     
@@ -43,6 +46,36 @@ class World:
                         appliedFragrance = fragrance / (dist ** 2)
                         self.board[entry[0]][entry[1]].increaseFragrance(appliedFragrance)
 
+    '''
+    updateFragrance: Cycles through all the tiles in the world and updates their fragrance levels.  
+        This will be done whenever a food source is fully gathered so the bees don't get tricked.
+        Note: I may make it whenever a food source drops by a certain percentage and apply it to only that source.
+            I think that's actually what I'll do.
+    args: none
+    return:
+        none
+    Notes:
+    1.  Cycles through all tiles on board
+    2.  If tile contains food, generates a circle of radius where the minimum scent added is 1
+    3.  Trims the circle's coordinates to fit the board.
+    4.  Takes new list and adds fragrance at a rate of f(x) = fragrance / r^2
+    '''
+    def updateFragrance(self):
+        for i in range(self.size):
+            for j in range(self.size):
+                if self.board[i][j].isFoodSource():
+                    fragrance = (self.board[i][j].getFragrance())
+                    radius = round((10 * fragrance) ** 0.5)
+                    origin = [i, j] #[y, x]
+                    coordList = self.circleArea(origin, radius)
+                    trimmedCoordList = self.coordinateFilter(coordList)
+                    for entry in trimmedCoordList:
+                        if entry == origin:
+                            appliedFragrance = fragrance
+                            continue
+                        dist = self.distance(entry, origin)
+                        appliedFragrance = fragrance / (dist ** 2)
+                        self.board[entry[0]][entry[1]].increaseFragrance(appliedFragrance)
     '''
     coordinateFilter: takes a list of coordinates, and filters out invalid ones based on board
     args: coordList
