@@ -36,6 +36,8 @@ class World:
                     coordList = self.circleArea(origin, radius)
                     trimmedCoordList = self.coordinateFilter(coordList)
                     for entry in trimmedCoordList:
+                        if entry == origin:
+                            continue
                         dist = self.distance(entry, origin)
                         appliedFragrance = fragrance / (dist ** 2)
                         self.board[entry[0]][entry[1]].increaseFragrance(appliedFragrance)
@@ -52,7 +54,7 @@ class World:
         maxY = self.size
         trimmedList = []
         for entry in coordList:
-            if entry[0] >= 0 or entry[0] < maxX or entry[1] >= 0 or entry[1] < maxY:
+            if entry[0] >= 0 and entry[0] < maxX and entry[1] >= 0 and entry[1] < maxY:
                 trimmedList.append(entry)
         return trimmedList
 
@@ -134,7 +136,7 @@ class World:
         x^2 - 2xh + h^2 =r^2 - (y-k)^2 for (y=k to y=k+r)
         x^2 -2xh = r^2 - h^2 - (y-k)^2
     '''
-    def circleArea(origin, radius):
+    def circleArea(self, origin, radius):
         coordList = []
         h = origin[0]
         k = origin[1]
@@ -153,7 +155,7 @@ class World:
     return:
         returns a double value that's the distance between the two points
     '''
-    def distance(coord1, coord2):
+    def distance(self, coord1, coord2):
         x1 = coord1[0]
         x2 = coord2[0]
         y1 = coord1[1]

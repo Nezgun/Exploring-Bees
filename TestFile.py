@@ -1,5 +1,5 @@
 from WorldGen.World import World
-from Displays import *
+from Displays.DisplayFunctions import *
 from mainFunctions import *
 
 testWorld = World()

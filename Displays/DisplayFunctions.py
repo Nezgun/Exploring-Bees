@@ -1,6 +1,6 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from WorldGen.World import WorldGen
+from WorldGen.World import World
 
 def fragranceMap(world):
     displayData = world.getBoardData("fragrance")
