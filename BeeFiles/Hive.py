@@ -4,12 +4,16 @@ from WorldGen.World import World
 from BeeFiles.Bee import Bee
 
 class Hive:
-    def __init__(self):
+    def __init__(self, world):
         self.location = [0, 0]
+        self.world
         self.totalBees = 0
-        #Home Bees
-        #Away Bees
-        foodSupply = 0
+        self.bees = {}
+        self.homeBees = {}
+        self.awayBees = {}
+        foodSupply = 10
+        for i in range(foodSupply):
+            self.createBee()
         #Memory
         #KeyMemory
         return
@@ -20,6 +24,7 @@ class Hive:
     def createBee(self):
         if self.foodSupply > 0:
             self.foodSupply -= 1
+            self.totalBees += 1
             #add a new bee to Home Bees
         return
 
