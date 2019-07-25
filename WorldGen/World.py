@@ -9,12 +9,12 @@ from BeeFiles.Hive import Hive
 class World:
     
     def __init__(self, size = 100):
-        self.size = size
-        self.board = [[0] * size for i in range(size)]
-        #i = y coord, j = x coord
-        for i in range(self.size):
-            for j in range(self.size):
-                self.board[i][j] = Tile(i + 1, j + 1)
+        #Setup Frame
+        self._size = size
+        self.board = [None] * (self._size ** 2)
+
+        #Initialize Data
+        self.initializeBoard()
         self.initializeFragrance()
 
 
@@ -30,21 +30,19 @@ class World:
     4.  Takes new list and adds fragrance at a rate of f(x) = fragrance / r^2
     '''
     def initializeFragrance(self):
-        for i in range(self.size):
-            for j in range(self.size):
-                if self.board[i][j].isFoodSource():
-                    fragrance = (self.board[i][j].getFragrance())
-                    radius = round((10 * fragrance) ** 0.5)
-                    origin = [i, j] #[y, x]
-                    coordList = self.circleArea(origin, radius)
-                    trimmedCoordList = self.coordinateFilter(coordList)
-                    for entry in trimmedCoordList:
-                        if entry == origin:
-                            appliedFragrance = fragrance
-                            continue
-                        dist = self.distance(entry, origin)
-                        appliedFragrance = fragrance / (dist ** 2)
-                        self.board[entry[0]][entry[1]].increaseFragrance(appliedFragrance)
+        for tile in self.board:
+            if tile.isFoodSource():
+                fragrance = tile.getFragrance()
+                radius = round((10 * fragrance) ** 0.5)
+                origin = self.indexToCoordinate(self.board.index(tile))
+                coordList = self.coordinateFilter(self.circleArea(origin, radius))
+                for entry in coordList:
+                    if entry == origin:
+                        appliedFragrance = fragrance
+                        continue
+                    dist = self.distance(entry, origin)
+                    appliedFragrance = fragrance / (dist ** 2)
+                    entry.increaseFragrance(appliedFragrance)
 
     '''
     updateFragrance: Cycles through all the tiles in the world and updates their fragrance levels.  
@@ -61,25 +59,60 @@ class World:
     4.  Takes new list and adds fragrance at a rate of f(x) = fragrance / r^2
     '''
     def updateFragrance(self):
-        for i in range(self.size):
-            for j in range(self.size):
-                if self.board[i][j].isFoodSource():
-                    fragrance = (self.board[i][j].getFragrance())
-                    radius = round((10 * fragrance) ** 0.5)
-                    origin = [i, j] #[y, x]
-                    coordList = self.circleArea(origin, radius)
-                    trimmedCoordList = self.coordinateFilter(coordList)
-                    for entry in trimmedCoordList:
-                        if entry == origin:
-                            appliedFragrance = fragrance
-                            continue
-                        dist = self.distance(entry, origin)
-                        appliedFragrance = fragrance / (dist ** 2)
-                        self.board[entry[0]][entry[1]].increaseFragrance(appliedFragrance)
+        for tile in self.board:
+            if tile.isFoodSource():
+                fragrance = tile.getFragrance()
+                radius = round((10 * fragrance) ** 0.5)
+                origin = self.indexToCoordinate(self.board.index(tile))
+                coordList = self.coordinateFilter(self.circleArea(origin, radius))
+                for entry in coordList:
+                    if entry == origin:
+                        appliedFragrance = fragrance
+                        continue
+                    dist = self.distance(entry, origin)
+                    appliedFragrance = fragrance / (dist ** 2)
+                    entry.increaseFragrance(appliedFragrance)
+
+    '''
+    indexToCoordinate: converts an index into the associated coordinate pair
+    args: index
+        index is the index of a specific tile
+    return:
+        returns the (x, y)
+    '''
+    def indexToCoordinate(self, index):
+        x = (index % self._size) + 1
+        y = ((index - (index % self._size)) / self._size) + 1
+        return (x, y)
+
+    '''
+    coordinateToIndex: converts a coordinate tuple into the associated index
+    args: coordinates
+        coordinates is a tuple of (x, y)
+    return:
+        returns the associated index for that coordinate pair
+    '''
+    def coordinateToIndex(self, coordinates):
+        x, y = coordinates
+        x -= 1
+        y -= 1
+        index = (y * self._size) + x
+        return index
+
+    '''
+    initializeBoard: generates tiles for every slot on the board
+    args: none
+    return: none
+    '''
+    def initializeBoard(self):
+        for newTile in self.board:
+            newTile = Tile(self.indexToCoordinate(self.board.index(newTile)))
+
+
     '''
     coordinateFilter: takes a list of coordinates, and filters out invalid ones based on board
     args: coordList
-        coordList is a list of coordinates in [x, y] format.
+        coordList is a list of tuple coordinates in (x, y) format.
     return:
         an updated list of coordinates with all out of bounds coordinates deleted.
     '''
@@ -92,18 +125,24 @@ class World:
                 trimmedList.append(entry)
         return trimmedList
 
+    '''
+    getSize: returns the size of one side of the board
+    args: none
+    return: 
+        returns the size of the board
+    '''
     def getSize(self):
         return self.size
 
-    def getTile(self, x, y):
-        return self.board[x][y]
-
-    def gatherFood(self, coords):
-        if self.board[coords[0]][coords[1]].isFoodSource():
-            self.board[coords[0]][coords[1]].foodReduce()
-            return 1
-        else:
-            return 0
+    '''
+    getTile: returns the tile at a location
+    args: coordinates
+        coordinates is a tuple in (x, y) format indicating the location of the tile
+    return:
+        returns the tile at the given location
+    '''
+    def getTile(self, coordinates):
+        return self.board[self.coordinateToIndex(coordinates)]
 
     '''
     getBoardData: Returns a desired set of data from the board
@@ -114,71 +153,41 @@ class World:
     '''
     def getBoardData(self, dataType = "standard"):
         boardData = []
-        for i in range(self.size):
-            for j in range(self.size):
-                coord = [i, j]
-                if dataType == "fragrance":
-                    data = self.board[i][j].getFragrance()
-                elif dataType == "standard":
-                    data = self.board[i][j].getFood()
-                else:
-                    print("Invalid dataType")
-                entry = [coord, data]
-                boardData.append(entry)
+        for tile in self.board:
+            index = self.board.index(tile)
+            if dataType == "fragrance":
+                data = tile.getFragrance()
+            elif dataType == "standard":
+                data = tile.getFood()
+            else:
+                print("Invalid dataType")
+            entry = [tile.getCoordinates(), data]
+            boardData.append(entry)
         return boardData
-
-    def displayBoard(self):
-        print(" " + ("_" * 3 * self.size))
-        for i in range(self.size):
-            display = "|"
-            for j in range(self.size):
-                display += str(self.board[i][j].getFood()).ljust(2) + " "
-            display += "|"
-            print(display)
-        print("|" + ("_" * 3 * self.size) + "|")
-
-    def displayCondensed(self):
-        display = "   "
-        for i in range(self.size):
-            display += str(i).ljust(3)
-        display += "\n"
-        for i in range(self.size):
-            display += str(i).ljust(3)
-            for j in range(self.size):
-                tileFood = self.board[i][j].getFood()
-                if tileFood > 75:
-                    display += "H".ljust(3)
-                elif (tileFood <= 75 ) and (tileFood > 25):
-                    display += "M".ljust(3)
-                elif (tileFood <= 25) and (tileFood > 0):
-                    display += "L".ljust(3)
-                else:
-                    display += " ".ljust(3)
-            display += "\n"
-        return display
 
     '''
     circleArea: generates a list of all the coordinates that fall within a circle of given radius/origin
     args: origin, radius
-        origin is a coordinate pair in [x, y] format that marks the center of a circle
+        origin is a coordinate pair in (x, y) format that marks the center of a circle
         radius is the radius of the circle
     return:
         a list of coordinates that fall within the area of a circle.  Does not account for world border.
     Notes:
         Circle Equation: (x-h)^2 + (y-k)^2 = r^2
         Knowns: y, h, k, r.  solve for x
-        x^2 - 2xh + h^2 =r^2 - (y-k)^2 for (y=k to y=k+r)
+        x^2 - 2xh + h^2 = r^2 - (y-k)^2 for (y = k - r to y = k + r)
         x^2 -2xh = r^2 - h^2 - (y-k)^2
+        x^2 - 2xh = constant - (y-k)^2
+        x^2 - 2xh - constant + (y-k)^2 = 0
     '''
-    def circleArea(self, origin, radius):
+    def circleArea(origin, radius):
         coordList = []
-        k = origin[0]
-        h = origin[1]
+        h, k = origin
         constant = (radius ** 2) - (h ** 2)
         for y in range(k - radius, k + radius):
             for x in range(h - radius, h + radius):
-                if ((x ** 2 - (2 * x * h)) - (constant - (y - k) ** 2)) <= 0.1:
-                    coordList.append([y, x])
+                if (x ** 2) - (2 * x * h) - constant + ((y - k) ** 2) <= 0.1:
+                    coordList.append((x, y))
         return coordList
 
     '''
@@ -196,4 +205,3 @@ class World:
         y2 = coord2[0]
         distance = (((x2 - x1) ** 2) + ((y2 - y1) ** 2)) ** 0.5
         return distance
-

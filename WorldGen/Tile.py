@@ -4,9 +4,8 @@
 import random
 
 class Tile:
-    def __init__(self, x, y):
-        self.xCoord = x
-        self.yCoord = y
+    def __init__(self, coordinates):
+        self.location = coordinates
         self.hive = False
 
         #Is this tile a food source?
@@ -22,10 +21,10 @@ class Tile:
 
     #Getters
     def getX(self):
-        return self.xCoord
+        return self.location[0]
 
     def getY(self):
-        return self.yCoord
+        return self.location[1]
 
     def isFoodSource(self):
         return self.foodSource
@@ -37,7 +36,7 @@ class Tile:
         return self.fragrance
 
     def getCoordinates(self):
-        return self.xCoord, self.yCoord
+        return self.location
 
     #Modifiers
 
@@ -58,7 +57,7 @@ class Tile:
     #Display
     def displayInfo(self):
         print("Internal Information:")
-        print("Coordinates: (" + str(self.xCoord) + ", " + str(self.yCoord) + ")")
+        print("Coordinates: " + self.location)
         print("Food Source: " + str(self.foodSource))
         print("Available Food: " + str(self.availableFood))
         print("Fragrance: " + str(self.fragrance))
