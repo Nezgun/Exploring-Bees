@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from WorldGen.World import World
+#from WorldGen.World import World
 from BeeFiles.Bee import Bee
 
 class Hive:
