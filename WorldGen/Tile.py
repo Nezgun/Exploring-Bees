@@ -3,7 +3,7 @@
 import random
 
 class Tile:
-    def __init__(self, coordinates):
+    def __init__(self, coordinates = (0, 0)):
         self.location = coordinates
         self.hive = False
 

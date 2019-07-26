@@ -11,7 +11,7 @@ class World:
     def __init__(self, size = 100):
         #Setup Frame
         self._size = size
-        self.board = [None] * (self._size ** 2)
+        self.board = []
 
         #Initialize Data
         self.initializeBoard()
@@ -42,7 +42,9 @@ class World:
                         continue
                     dist = self.distance(entry, origin)
                     appliedFragrance = fragrance / (dist ** 2)
-                    entry.increaseFragrance(appliedFragrance)
+                    index = self.coordinateToIndex(entry)
+                    tileSelection = self.board[index]
+                    tileSelection.increaseFragrance(appliedFragrance)
 
     '''
     updateFragrance: Cycles through all the tiles in the world and updates their fragrance levels.  
@@ -82,7 +84,7 @@ class World:
     '''
     def indexToCoordinate(self, index):
         x = (index % self._size) + 1
-        y = ((index - (index % self._size)) / self._size) + 1
+        y = int(((index - (index % self._size)) / self._size) + 1)
         return (x, y)
 
     '''
@@ -105,8 +107,8 @@ class World:
     return: none
     '''
     def initializeBoard(self):
-        for newTile in self.board:
-            newTile = Tile(self.indexToCoordinate(self.board.index(newTile)))
+        for i in range(self._size ** 2):
+            self.board.append(Tile(self.indexToCoordinate(i)))
 
 
     '''
@@ -117,8 +119,8 @@ class World:
         an updated list of coordinates with all out of bounds coordinates deleted.
     '''
     def coordinateFilter(self, coordList):
-        maxX = self.size
-        maxY = self.size
+        maxX = self._size
+        maxY = self._size
         trimmedList = []
         for entry in coordList:
             if entry[0] >= 0 and entry[0] < maxX and entry[1] >= 0 and entry[1] < maxY:
@@ -132,7 +134,7 @@ class World:
         returns the size of the board
     '''
     def getSize(self):
-        return self.size
+        return self._size
 
     '''
     getTile: returns the tile at a location
@@ -180,7 +182,7 @@ class World:
         x^2 - 2xh = constant - (y-k)^2
         x^2 - 2xh - constant + (y-k)^2 = 0
     '''
-    def circleArea(origin, radius):
+    def circleArea(self, origin, radius):
         coordList = []
         h, k = origin
         constant = (radius ** 2) - (h ** 2)

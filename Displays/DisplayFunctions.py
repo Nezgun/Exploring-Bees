@@ -8,12 +8,11 @@ def fragranceMap_2D(world):
     yList = np.arange(world.getSize())
     displayData = world.getBoardData("fragrance")
     fragranceData = []
-    for i in range(len(displayData)):
-        fragranceData.append(displayData[i][1])
+    for entry in displayData:
+        fragranceData.append(entry[1])
     X, Y = np.meshgrid(xList, yList)
     Z = np.array(fragranceData)
     Z = Z.reshape((world.getSize(), world.getSize()))
-    print(Z.shape)
 
     #Linear
     plt.figure(1)
