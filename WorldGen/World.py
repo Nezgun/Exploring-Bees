@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 
 #WORLD GEN ISSUE: Takes up wayyyy too much ram for a 5k x 5k world.  Need to modularize the generation
-#Generate a dictionary of coordinates that coorespond to their tiles, that way can iterate through a dictionary rather than a double for loop
+import random
 
 from WorldGen.Tile import Tile
 from BeeFiles.Hive import Hive
 
 class World:
     
-    def __init__(self, size = 100):
+    def __init__(self, size = 100, hives = 1):
         #Setup Frame
         self._size = size
         self.board = []
+        self.numHives = hives
+        self.hiveLocations = []
+        self.foodLocations = []
 
         #Initialize Data
         self.initializeBoard()
         self.initializeFragrance()
+        self.initializeHives()
 
 
     '''
@@ -32,6 +36,7 @@ class World:
     def initializeFragrance(self):
         for tile in self.board:
             if tile.isFoodSource():
+                self.foodLocations.append(self.indexToCoordinate(self.board.index(tile))) #adds to food source list
                 fragrance = tile.getFragrance()
                 radius = round((10 * fragrance) ** 0.5)
                 origin = self.indexToCoordinate(self.board.index(tile))
@@ -45,6 +50,18 @@ class World:
                     index = self.coordinateToIndex(entry)
                     tileSelection = self.board[index]
                     tileSelection.increaseFragrance(appliedFragrance)
+
+    '''
+    '''
+    def initializeHives(self):
+        for i in range(self.numHives):
+            searching = True
+            while searching:
+                index = random.randint(0, self._size ** 2)
+                if (not self.board[index].isFoodSource()) and (not self.board[index].hasHive()):
+                    self.board[index].addHive()
+                    self.hiveLocations.append(self.indexToCoordinate(index))
+                    searching = False
 
     '''
     updateFragrance: Cycles through all the tiles in the world and updates their fragrance levels.  
@@ -135,6 +152,16 @@ class World:
     '''
     def getSize(self):
         return self._size
+
+    '''
+    '''
+    def getHiveLocations(self):
+        return self.hiveLocations
+
+    '''
+    '''
+    def getFoodLocations(self):
+        return self.foodLocations
 
     '''
     getTile: returns the tile at a location

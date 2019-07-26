@@ -28,6 +28,9 @@ class Tile:
     def isFoodSource(self):
         return self.foodSource
 
+    def hasHive(self):
+        return self.hive
+
     def getFood(self):
         return self.availableFood
 
@@ -38,6 +41,8 @@ class Tile:
         return self.location
 
     #Modifiers
+    def addHive(self):
+        self.hive = True
 
     #adds to fragrance.
     def increaseFragrance(self, val):

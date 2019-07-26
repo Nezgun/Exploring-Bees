@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 
-#from WorldGen.World import World
+from WorldGen.World import World
+#Bee Imports
 from BeeFiles.Bee import Bee
+from BeeFiles.Queen import Queen
+from BeeFiles.Worker import Worker
 
 class Hive:
-    def __init__(self, world):
+    def __init__(self, world = World(), location = (0, 0)):
         self.location = [0, 0]
-        self.world
+        self.world = world
         self.totalBees = 0
         self.bees = {}
         self.homeBees = {}
         self.awayBees = {}
-        foodSupply = 10
-        for i in range(foodSupply):
-            self.createBee()
+        self.foodSupply = 10
         #Memory
         #KeyMemory
+        return
+
+    def initializeBees(self):
         return
 
     def getLocation(self):
