@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from BeeFiles.Bee import Bee
+from Main_Directory.BeeFiles.Bee import Bee
 
 class Worker(Bee):
     def __init__(self):

@@ -2,9 +2,9 @@
 The simulation object will hold all the data for a full simulation and will import what is necessary.
 '''
 
-from WorldGen.World import World
+from Main_Directory.WorldGen.World import World
 
-from BeeFiles.Hive import Hive
+from Main_Directory.BeeFiles.Hive import Hive
 
 class Simulation(object):
     def __init__(self):

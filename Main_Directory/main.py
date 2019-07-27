@@ -1,3 +1,3 @@
-from mainFunctions import *
+from Main_Directory.mainFunctions import *
 
 execute()
