@@ -13,6 +13,7 @@ class Simulation(object):
         hiveLocations = self._world.getHiveLocations()
         for location in hiveLocations:
             self.hiveList.append(Hive(self._world, location))
+        self.turns = 0
     
     def displaySimulationData(self):
         return
