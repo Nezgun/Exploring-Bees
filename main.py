@@ -1,0 +1,3 @@
+from mainFunctions import *
+
+execute()

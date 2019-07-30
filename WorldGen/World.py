@@ -3,8 +3,8 @@
 #WORLD GEN ISSUE: Takes up wayyyy too much ram for a 5k x 5k world.  Need to modularize the generation
 import random
 
-from Main_Directory.WorldGen.Tile import Tile
-from Main_Directory.BeeFiles.Hive import Hive
+from WorldGen.Tile import Tile
+from BeeFiles.Hive import Hive
 
 class World:
     

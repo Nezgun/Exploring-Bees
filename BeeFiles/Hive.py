@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from Main_Directory.WorldGen.World import World
 #Bee Imports
-from Main_Directory.BeeFiles.Bee import Bee
-from Main_Directory.BeeFiles.Queen import Queen
-from Main_Directory.BeeFiles.Worker import Worker
+from BeeFiles.Bee import Bee
+from BeeFiles.Queen import Queen
+from BeeFiles.Worker import Worker
 
 class Hive:
     def __init__(self, world = World(), location = (0, 0)):

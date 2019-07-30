@@ -1,4 +1,4 @@
-from Main_Directory.WorldGen.World import World
+from WorldGen.World import World
 
 def displayOverview(size, numOfWorlds):
     print("Initalization Overview")

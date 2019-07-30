@@ -1,6 +1,6 @@
-from Main_Directory.simulation import Simulation
-from Main_Directory.Displays.DisplayFunctions import *
-from Main_Directory.mainFunctions import *
+from simulation import Simulation
+from Displays.DisplayFunctions import *
+from mainFunctions import *
 
 #WorldGen Test
 '''

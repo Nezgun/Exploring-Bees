@@ -1,7 +1,7 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
-from Main_Directory.WorldGen.World import World
+from WorldGen.World import World
 
 def fragranceMap_2D(world):
     xList = np.arange(world.getSize())
