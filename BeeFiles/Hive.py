@@ -6,9 +6,8 @@ from BeeFiles.Queen import Queen
 from BeeFiles.Worker import Worker
 
 class Hive:
-    def __init__(self, world = World(), location = (0, 0)):
+    def __init__(self, location = (0, 0)):
         self.location = [0, 0]
-        self.world = world
         self.totalBees = 0
         self.bees = {}
         self.homeBees = {}

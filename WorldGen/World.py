@@ -12,8 +12,10 @@ class World:
         #Setup Frame
         self._size = size
         self.board = []
+
         self.numHives = hives
         self.hiveLocations = []
+
         self.foodLocations = []
 
         #Initialize Data
@@ -62,6 +64,11 @@ class World:
                     self.board[index].addHive()
                     self.hiveLocations.append(self.indexToCoordinate(index))
                     searching = False
+
+    '''
+    '''
+    def getHiveLocations(self):
+        return self.hiveLocations
 
     '''
     updateFragrance: Cycles through all the tiles in the world and updates their fragrance levels.  
@@ -153,10 +160,6 @@ class World:
     def getSize(self):
         return self._size
 
-    '''
-    '''
-    def getHiveLocations(self):
-        return self.hiveLocations
 
     '''
     '''
