@@ -7,7 +7,8 @@ from WorldGen.World import World
 from BeeFiles.Hive import Hive
 
 class Simulation(object):
-    def __init__(self):
+    def __init__(self, size):
+        self._size = size
         self._world = World()
         self.hiveList = []
         hiveLocations = self._world.getHiveLocations()

@@ -4,10 +4,11 @@
 #from DataStorageSystems.LinkedList import LinkedList
 
 class Bee(object):
-    def __init__(self, world, hive):
+    def __init__(self, location, name, home):
         #General Bee Metadata
-        self._name = None #Bee's ID
-        self.location = self._affiliation.getLocation() #Current location => starts in hive
+        self._home = home
+        self._name = name #Bee's ID
+        self.location = None #Current location => starts in hive
 
         #importantMemory
         #genericMemory linkedlist

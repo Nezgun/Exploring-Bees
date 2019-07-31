@@ -4,7 +4,6 @@
 import random
 
 from WorldGen.Tile import Tile
-from BeeFiles.Hive import Hive
 
 class World:
     

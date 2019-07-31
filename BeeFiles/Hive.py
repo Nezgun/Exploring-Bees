@@ -6,9 +6,10 @@ from BeeFiles.Queen import Queen
 from BeeFiles.Worker import Worker
 
 class Hive:
-    def __init__(self, location = (0, 0)):
-        self.location = [0, 0]
-        self.totalBees = 0
+    def __init__(self, location):
+        self._location = location
+        self.totalBees = 1
+        self.queen = Queen(self._location, "Queen", self._location)
         self.bees = {}
         self.homeBees = {}
         self.awayBees = {}
@@ -17,17 +18,25 @@ class Hive:
         #KeyMemory
         return
 
-    def initializeBees(self):
-        return
+    #Getters
 
     def getLocation(self):
-        return self.location
+        return self._location
+
+    #Modifiers
 
     def createBee(self):
         if self.foodSupply > 0:
             self.foodSupply -= 1
             self.totalBees += 1
             #add a new bee to Home Bees
+        return
+
+    #Utilities
+
+    #Initialization
+
+    def initializeBees(self):
         return
 
 '''
