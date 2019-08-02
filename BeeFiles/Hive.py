@@ -9,7 +9,7 @@ class Hive:
     def __init__(self, location):
         self._location = location
         self.totalBees = 1
-        self.queen = Queen(self._location, "Queen", self._location)
+        #self.queen = Queen(self._location, "Queen", self._location)
         self.bees = {}
         self.homeBees = {}
         self.awayBees = {}

@@ -1,5 +1,5 @@
 from simulation import Simulation
-from Displays.DisplayFunctions import *
+from DisplayFunctions import *
 from mainFunctions import *
 
 #WorldGen Test
