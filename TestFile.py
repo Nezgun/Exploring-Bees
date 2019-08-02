@@ -9,6 +9,6 @@ fragranceMap_2D(testWorld)
 '''
 
 #WorldGen/Simulation Test
-instance1 = Simulation()
+instance1 = Simulation(100)
 testWorld = instance1.getWorld()
 fragranceMap_2D(testWorld)
