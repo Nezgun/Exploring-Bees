@@ -1,10 +1,26 @@
 // Sea Bees.cpp : Defines the entry point for the application.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "Sea Bees.h"
+#include "Worker.h"
+#include "Queen.h"
+#include <iomanip>
+#include <iostream>
 
-#define MAX_LOADSTRING 100
+using namespace std;
+
+
+int main() 
+{
+	
+	Worker drone = Worker();
+	drone.setDestination(23, 10, 7);
+}
+
+/*
+
+#define MAX_LOADSTRING 150
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -178,3 +194,5 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+*/
