@@ -45,8 +45,8 @@ public:
 	//Support Functions
 	float radians(int degrees);
 	float distance();
-	int changePitch();
-	int changeOrientation();
+	void changePitch();
+	void changeOrientation();
 
 
 	void look(); //look in a 90 degree wedge left and right, and 90 degree wedge up and down

@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include "Worker.h"
-
 
 Worker::Worker()
 {
@@ -126,7 +124,7 @@ float Worker::distance()
 	return sqrt(pow(destination[0] - position[0], 2) + pow(destination[1] - position[1], 2) + pow(destination[2] - position[2], 2));
 }
 
-int Worker::changeOrientation()
+void Worker::changeOrientation()
 {
 	float dist = distance();
 
@@ -137,9 +135,12 @@ int Worker::changeOrientation()
 	*/
 }
 
-int Worker::changePitch()
+void Worker::changePitch()
 {
 
+	pitch;
+	destination[2];
+	position[2];
 }
 
 Worker::~Worker()
